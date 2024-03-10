@@ -55,4 +55,7 @@ table {
   box-sizing: border-box;
 	text-decoration: none;
 }
+html {
+	background-color: #0f0f0f;
+}
 `;
