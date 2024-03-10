@@ -1,23 +1,20 @@
-import { useEffect, useState } from "react";
-import { CharacterSummary } from "../types/CharacterSummary";
+import { useGetAllCharacters } from "../hooks/useGetAllCharacters";
 
 const Home = () => {
-  const [allCharacters, setAllCharacters] = useState<CharacterSummary[]>([]);
-
-  useEffect(() => {
-    fetch("https://disney_api.nomadcoders.workers.dev/characters")
-      .then((res) => res.json())
-      .then(setAllCharacters);
-  }, []);
+  const { data: allCharacters, isLoading } = useGetAllCharacters();
 
   return (
     <div>
       <h1>Home</h1>
-      <ul>
-        {allCharacters.map((summary) => (
-          <li key={summary.id}>{summary.name}</li>
-        ))}
-      </ul>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {allCharacters?.map((summary) => (
+            <li key={summary.id}>{summary.name}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
