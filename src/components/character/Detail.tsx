@@ -18,6 +18,19 @@ const PageTitle = styled.h1`
   text-align: center;
 `;
 
+const BackButton = styled.div`
+  color: #efefef;
+  font-size: 24px;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:hover {
+    background-color: #3f3f3f;
+  }
+`;
+
 const Card = styled.div<{ children?: React.ReactNode }>`
   display: flex;
   flex-direction: column;
@@ -66,6 +79,9 @@ const Detail = () => {
   return (
     <Background>
       <PageTitle>Disney Characters</PageTitle>
+      <BackButton as="a" href="/">
+        ←
+      </BackButton>
       {isLoading || !characterDetails ? (
         <p>Loading...</p>
       ) : (
