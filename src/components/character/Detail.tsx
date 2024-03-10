@@ -1,26 +1,22 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CharacterDetails } from "../../types/CharacterDetails";
+import { useGetCharacterDetails } from "../../hooks/useGetCharacterDetails";
 
 const Detail = () => {
   const { id } = useParams();
-  const [details, setDetails] = useState<CharacterDetails | null>(null);
 
-  useEffect(() => {
-    fetch(`https://disney_api.nomadcoders.workers.dev/characters/${id}`)
-      .then((res) => res.json())
-      .then(setDetails);
-  }, []);
+  const { data: characterDetails, isLoading } = useGetCharacterDetails(id);
 
   return (
     <div>
       <h1>Detail</h1>
-      {details && (
-        <ul key={details.id}>
-          <li>{details.name}</li>
-          <li>{details.imageUrl}</li>
-          <li>{details.films}</li>
-          <li>{details.sourceUrl}</li>
+      {isLoading || !characterDetails ? (
+        <p>Loading...</p>
+      ) : (
+        <ul key={characterDetails.id}>
+          <li>{characterDetails.name}</li>
+          <li>{characterDetails.imageUrl}</li>
+          <li>{characterDetails.films}</li>
+          <li>{characterDetails.sourceUrl}</li>
         </ul>
       )}
     </div>
