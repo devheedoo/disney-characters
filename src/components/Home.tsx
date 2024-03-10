@@ -62,7 +62,7 @@ const Home = () => {
       ) : (
         <CardsContainer>
           {allCharacters?.map((summary) => (
-            <Card key={summary.id}>
+            <Card key={summary.id} as="a" href={`/character/${summary.id}`}>
               <CardImage imageUrl={summary.imageUrl} />
               {summary.name}
             </Card>
